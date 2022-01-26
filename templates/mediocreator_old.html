@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <title>Medio Creator</title>
+</head>
+<body>
+    <label for="youtube_url">Youtube url:</label><br>
+    <input type="text" id="youtube_url" name="youtube_url"><br>
+    <input type="text" id="category" name="category"><br>
+    <input type="text" id="name" name="name"><br>
+    <input type="button" id="fetch" value="fetch"></button>
+    <div id="editor">
+        {{name}}
+    </div>
+    <script>
+        $(document).ready(function() {
+           $('#fetch').click(function(){
+               var youtube_url = $('#youtube_url').val();
+               var cat = $('#category').val();
+               var name = $('#name').val();
+               $.ajax({
+               url: "/fetchurl",
+               type: "get",
+               data: {url: youtube_url,
+               cat:cat,
+               name:name},
+               success: function(response) {
+               $("#editor").html(response.html);
+              },
+              error: function(xhr) {
+                //Do Something to handle error
+             }
+             });
+           });
+        });
+      </script>
+</body>
+</html>

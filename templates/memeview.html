@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MemeView</title>
+</head>
+<body>
+  <form action="/memeview?user={{user}}" method="post">
+    {%for meme in meme_list%}
+      {{meme[0]}} {{meme[1]}}<input type="checkbox" name="memes" value= {{meme[1]}} checked>
+      <br>
+        <audio controls autoplay>
+          <source src="{{ url_for('static', filename = meme[1]) }}" type="audio/mpeg">
+        </audio>
+      <br>
+    {%endfor%}
+    <input type="submit" value="upload">
+  </form>
+</body>
+</html>
